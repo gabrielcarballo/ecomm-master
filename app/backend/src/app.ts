@@ -11,6 +11,7 @@ class App {
   ) {
     this.app = express();
     this.config();
+    this.app.get('/', (_req, res) => res.json({ ok: true }));
   }
 
   private config():void {
