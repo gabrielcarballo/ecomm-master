@@ -1,6 +1,6 @@
 FROM node:18.17-alpine
 
-WORKDIR /app-backend
+WORKDIR /app/backend
 
 COPY package*.* ./
 
@@ -14,5 +14,5 @@ ENTRYPOINT [ "npm", "run" ]
 
 CMD [ "start" ]
 
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 CMD curl --fail http://localhost:3000/ || exit 1
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 CMD curl --fail http://localhost:3001/ || exit 1
 
