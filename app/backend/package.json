@@ -5,6 +5,8 @@
   "main": "server.ts",
   "type": "commonjs",
   "scripts": {
+    "clean": "rm -rf /app/backend/.build",
+    "stop": "echo 'Stopping the server...'",
     "build": "tsc --project tsconfig.json --outDir .build",
     "prestart": "npm run build",
     "start": "node .build/server.js",
