@@ -5,6 +5,7 @@
   "main": "server.ts",
   "type": "commonjs",
   "scripts": {
+    "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "clean": "rm -rf ./application/backend/.build",
     "build": "tsc --project tsconfig.json --outDir .build",
     "prestart": "npm run build",
@@ -31,6 +32,7 @@
     "joi": "^17.4.0",
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
+    "mysql2": "^2.3.0",
     "on-exit": "^1.0.1",
     "sequelize": "^6.6.5",
     "typeorm": "^0.3.17"

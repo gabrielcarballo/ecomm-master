@@ -1,7 +1,7 @@
 import { Model, STRING, BOOLEAN, NUMBER } from 'sequelize';
 import db from '.';
 
-interface PersonalAccountAttributes {
+interface BusinessAccountAttributes {
   id: number,
   cnpj: string,
   name: string,
@@ -10,7 +10,7 @@ interface PersonalAccountAttributes {
   status: boolean,
 }
 
-class BusinessAccount extends Model<PersonalAccountAttributes> {
+class BusinessAccount extends Model<BusinessAccountAttributes> {
   declare public id: number;
   declare public cnpj: string;
   declare public name: string;

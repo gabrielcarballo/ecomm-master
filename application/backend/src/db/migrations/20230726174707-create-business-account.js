@@ -1,12 +1,12 @@
 async function up(queryInterface, Sequelize) {
-  await queryInterface.createTable('personal_accounts', {
+  await queryInterface.createTable('business_accounts', {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: Sequelize.INTEGER,
     },
-    cpf: { type: Sequelize.STRING },
+    cnpj: { type: Sequelize.STRING },
     name: { type: Sequelize.STRING },
     email: { type: Sequelize.STRING },
     password: { type: Sequelize.STRING },
@@ -19,7 +19,7 @@ async function up(queryInterface, Sequelize) {
       defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') } });
 }
 async function down(queryInterface, _Sequelize) {
-  await queryInterface.dropTable('personal_accounts');
+  await queryInterface.dropTable('business_accounts');
 }
 
 module.exports = { up, down };
