@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.17-alpine'
+
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm ci
+          cd ../backend
+          npm ci
+
+      - name: Lint frontend
+        run: cd frontend && npm run lint
+
+      - name: Test frontend
+        run: cd frontend && npm test
+
+      - name: Lint backend
+        run: cd backend && npm run lint
+
+      - name: Test backend
+        run: cd backend && npm test
