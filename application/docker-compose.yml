@@ -6,9 +6,9 @@ services:
     build: ./frontend
     ports:
       - "3000:3000"
-    working_dir: /app/frontend
+    working_dir: /application/frontend
     volumes:
-      - ./frontend:/app/frontend
+      - ./frontend:/application/frontend
     stdin_open: true
     tty: true
     healthcheck:
@@ -21,13 +21,13 @@ services:
     build: ./backend
     ports:
       - "3001:3001"
-    working_dir: /app/backend
+    working_dir: /application/backend
     healthcheck:
       test: ["CMD", "lsof", "-t", "-i:3001"]
       timeout: 10s
       retries: 5
     volumes:
-      - ./backend:/app/backend
+      - ./backend:/application/backend
     stdin_open: true
     tty: true
     depends_on:
