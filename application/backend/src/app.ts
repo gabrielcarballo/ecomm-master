@@ -1,13 +1,11 @@
 import * as express from 'express';
 
-
 class App {
   public app: express.Express;
 
   constructor(
     // routes like
     // private teamRouter = teamRouterManager,
-
   ) {
     this.app = express();
     this.config();
