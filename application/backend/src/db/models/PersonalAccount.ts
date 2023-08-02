@@ -1,5 +1,6 @@
 import { Model, STRING, BOOLEAN, NUMBER } from 'sequelize';
 import db from '.';
+import CPF from '../../types/CPF';
 
 interface PersonalAccountAttributes {
   id: number,
@@ -18,6 +19,7 @@ class PersonalAccount extends Model<PersonalAccountAttributes> {
   declare public password: string;
   declare public status: boolean;
 }
+
 PersonalAccount.init({
   id: {
     type: NUMBER,
@@ -32,6 +34,18 @@ PersonalAccount.init({
     type: STRING,
     allowNull: false,
     unique: true,
+    validate: {
+      isCpf(cpf: string) {
+        try {
+          const isValid = new CPF(cpf);
+          isValid.validateCpf();
+        } catch (err: unknown) {
+          if (err instanceof Error) {
+            throw new Error(err.message);
+          }
+        }
+      },
+    },
   },
   name: {
     type: STRING,
@@ -53,8 +67,21 @@ PersonalAccount.init({
   },
 }, {
   underscored: true,
-
   sequelize: db,
   modelName: 'personal_accounts',
   timestamps: false,
+});
+
+PersonalAccount.beforeCreate((account) => {
+  const cpf = new CPF(account.cpf);
+  if (!cpf.validateCpf()) {
+    throw new Error('CPF inválido');
+  }
+});
+
+PersonalAccount.beforeUpdate((account) => {
+  const cpf = new CPF(account.cpf);
+  if (!cpf.validateCpf()) {
+    throw new Error('CPF inválido');
+  }
 });

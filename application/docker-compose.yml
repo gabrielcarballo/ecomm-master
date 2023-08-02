@@ -53,6 +53,6 @@ services:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 10s
       retries: 5
-    restart: 'on_failure'
+    restart: 'always'
     cap_add:
       - SYS_NICE

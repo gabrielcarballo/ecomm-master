@@ -3,7 +3,7 @@
 module.exports = {
   async up(queryInterface, _Sequelize) {
     await queryInterface.bulkInsert('personal_accounts', [{
-      cpf: '12345678910',
+      cpf: '12345678910000000',
       name: 'John Doe',
       email: 'johndoe@gmail.com',
       password: '123456',
