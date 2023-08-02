@@ -1,5 +1,5 @@
 export default class CPF {
-  public _cpf: string;
+  private _cpf: string;
   private _dv1: string;
   private _dv2: string;
 
@@ -40,7 +40,8 @@ export default class CPF {
 
   validateCpf(): boolean {
     return (
-      this.digitoVerificador1() === Number(this._cpf[this._cpf.length - 2])
-    && this.digitoVerificador2() === Number(this._cpf[this._cpf.length - 1]));
+      this.digitoVerificador1() === Number(this._dv1)
+    && this.digitoVerificador2() === Number(this._dv2)
+    );
   }
 }

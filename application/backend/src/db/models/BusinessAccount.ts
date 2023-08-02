@@ -1,5 +1,6 @@
-import { Model, STRING, BOOLEAN, NUMBER } from 'sequelize';
+import { Model, STRING, BOOLEAN, INTEGER } from 'sequelize';
 import db from '.';
+import CNPJ from '../../entities/CNPJ';
 
 interface BusinessAccountAttributes {
   id: number,
@@ -20,7 +21,7 @@ class BusinessAccount extends Model<BusinessAccountAttributes> {
 }
 BusinessAccount.init({
   id: {
-    type: NUMBER,
+    type: INTEGER,
     allowNull: false,
     unique: true,
     primaryKey: true,
@@ -32,6 +33,14 @@ BusinessAccount.init({
     type: STRING,
     allowNull: false,
     unique: true,
+    validate: {
+      isCnpj(cnpj: string) {
+        const isValid = new CNPJ(cnpj).validateCnpj();
+        if (!isValid) {
+          throw new Error('CNPJ inválido');
+        }
+      },
+    },
   },
   name: {
     type: STRING,

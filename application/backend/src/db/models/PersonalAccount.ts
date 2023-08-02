@@ -1,6 +1,6 @@
-import { Model, STRING, BOOLEAN, NUMBER } from 'sequelize';
+import { Model, STRING, BOOLEAN, INTEGER } from 'sequelize';
 import db from '.';
-import CPF from '../../types/CPF';
+import CPF from '../../entities/CPF';
 
 interface PersonalAccountAttributes {
   id: number,
@@ -22,7 +22,7 @@ class PersonalAccount extends Model<PersonalAccountAttributes> {
 
 PersonalAccount.init({
   id: {
-    type: NUMBER,
+    type: INTEGER,
     allowNull: false,
     unique: true,
     primaryKey: true,
@@ -36,17 +36,14 @@ PersonalAccount.init({
     unique: true,
     validate: {
       isCpf(cpf: string) {
-        try {
-          const isValid = new CPF(cpf);
-          isValid.validateCpf();
-        } catch (err: unknown) {
-          if (err instanceof Error) {
-            throw new Error(err.message);
-          }
+        const isValid = new CPF(cpf).validateCpf();
+        if (!isValid) {
+          throw new Error('CPF inválido');
         }
       },
     },
   },
+
   name: {
     type: STRING,
     allowNull: false,
@@ -70,18 +67,4 @@ PersonalAccount.init({
   sequelize: db,
   modelName: 'personal_accounts',
   timestamps: false,
-});
-
-PersonalAccount.beforeCreate((account) => {
-  const cpf = new CPF(account.cpf);
-  if (!cpf.validateCpf()) {
-    throw new Error('CPF inválido');
-  }
-});
-
-PersonalAccount.beforeUpdate((account) => {
-  const cpf = new CPF(account.cpf);
-  if (!cpf.validateCpf()) {
-    throw new Error('CPF inválido');
-  }
 });
