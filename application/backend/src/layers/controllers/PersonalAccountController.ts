@@ -9,7 +9,6 @@ export default class PersonalAccountController {
         { message: 'Account created successfully', content: account },
       );
     }
-
     return res.status(500).json({ message: 'Internal server error' });
   }
 }
