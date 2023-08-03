@@ -1,14 +1,17 @@
 import * as express from 'express';
+import PersonalAccountManager from './routes/personalAccount.route';
 
 class App {
   public app: express.Express;
 
   constructor(
-    // routes like
-    // private teamRouter = teamRouterManager,
+    private PersonalAccount = PersonalAccountManager,
   ) {
     this.app = express();
     this.config();
+    this.app.get('/', (_req, res) => res.json({ ok: true }));
+
+    this.app.use('/personal-account', this.PersonalAccount);
   }
 
   private config():void {
@@ -28,4 +31,7 @@ class App {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/naming-convention, import/prefer-default-export
 export { App };
+
+export const { app } = new App();
