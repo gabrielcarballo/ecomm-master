@@ -5,20 +5,20 @@
   "main": "server.ts",
   "type": "commonjs",
   "scripts": {
-    "lint": "eslint ./src --ext .ts",
-    "start": "node .build/server.js",
-    "dev": "nodemon .build/server.js",
-    "test": "mocha -r ts-node/register ./src/tests/*$NAME*.{test,spec}.ts -t 10000 --exit",
-    "test:coverage": "nyc npm run test",
-    "clean": "rm -rf .build",
-    "build": "tsc --project tsconfig.json --outDir .build",
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "clean": "rm -rf ./application/backend/.build",
+    "build": "tsc --project tsconfig.json --outDir .build",
     "prestart": "npm run build && npm run db:reset",
+    "start": "nodemon .build/server.js",
     "predev": "npm run db:reset",
+    "dev": "npm run build && nodemon .build/server.js",
     "sequelize": "sequelize",
     "sequelize:migrate": "npm run sequelize -- db:migrate",
     "sequelize:seed": "npm run sequelize -- db:seed:all",
-    "test:coverage:json": "nyc --reporter=json-summary npm run test"
+    "test": "mocha -r ts-node/register ./src/tests/*$NAME*.{test,spec}.ts -t 10000 --exit",
+    "test:coverage": "nyc npm run test",
+    "test:coverage:json": "nyc --reporter=json-summary npm run test",
+    "lint": "eslint ./src --ext .ts"
   },
   "author": "gabrielcarballo",
   "license": "MIT",
@@ -62,12 +62,12 @@
     "jest": "^27.2.5",
     "mocha": "^10.2.0",
     "nodemon": "^2.0.22",
+    "nyc": "^15.1.0",
+    "sequelize": "^6.6.5",
+    "sequelize-cli": "^6.6.1",
     "sinon": "^15.2.0",
     "ts-jest": "^27.0.5",
     "ts-node": "^10.9.1",
-    "typescript": "^4.9.5",
-    "sequelize": "^6.6.5",
-    "sequelize-cli": "^6.6.1",
-    "nyc": "^15.1.0"
+    "typescript": "^4.9.5"
   }
 }
