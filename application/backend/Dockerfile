@@ -12,6 +12,6 @@ EXPOSE 3001
 
 ENTRYPOINT [ "npm", "run" ]
 
-CMD [ "start" ]
+CMD [ "dev" ]
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 CMD curl --fail http://localhost:3001/ || exit 1

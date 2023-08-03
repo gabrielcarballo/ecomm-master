@@ -18,7 +18,9 @@ export default class PersonalAccountModel {
       name,
       password,
     });
-    if (accountToAdd) return accountToAdd;
-    return null;
+    if (!accountToAdd) {
+      throw new Error('Data not created');
+    }
+    return accountToAdd;
   }
 }

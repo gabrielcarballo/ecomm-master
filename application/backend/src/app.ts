@@ -5,13 +5,12 @@ class App {
   public app: express.Express;
 
   constructor(
-    private PersonalAccount = PersonalAccountManager,
+    private PersonalRouter = PersonalAccountManager,
   ) {
     this.app = express();
     this.config();
-    this.app.get('/', (_req, res) => res.json({ ok: true }));
-
-    this.app.use('/personal-account', this.PersonalAccount);
+    this.app.use('/personal', this.PersonalRouter);
+    this.app.get('/', (req, res) => res.json({ ok: true }));
   }
 
   private config():void {
@@ -31,7 +30,5 @@ class App {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/naming-convention, import/prefer-default-export
+// eslint-disable-next-line import/prefer-default-export
 export { App };
-
-export const { app } = new App();
