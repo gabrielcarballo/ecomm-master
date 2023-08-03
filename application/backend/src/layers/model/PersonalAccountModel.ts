@@ -11,7 +11,7 @@ import { PersonalAccountAtt } from '../../middlewares/validations/schemas/Person
 export default class PersonalAccountModel {
   public static async createAccount(
     { cpf, email, name, password }: PersonalAccountAtt,
-  ) {
+  ): Promise<PersonalAccount | null> {
     const accountToAdd = await PersonalAccount.create({
       cpf,
       email,

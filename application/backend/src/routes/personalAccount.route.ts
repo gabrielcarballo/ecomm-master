@@ -6,7 +6,7 @@ import PersonalAccountValidation from '../middlewares/validations/PersonalAccoun
 const PersonalAccountRouter = express.Router();
 
 PersonalAccountRouter.post(
-  '/create',
+  'create',
   (req: Request, res: Response, next: NextFunction) => {
     PersonalAccountValidation(req, res, next);
     PersonalAccountController.createAccount(req, res, next);
