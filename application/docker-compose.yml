@@ -34,6 +34,7 @@ services:
       db:
         condition: service_healthy
     restart: 'on-failure'
+    command: dev
     environment:
       - JWT_SECRET=bruebiel
       - DB_HOST=db
@@ -41,6 +42,7 @@ services:
       - DB_USER=root
       - DB_PASSWORD=databasepassword
       - APP_PORT=3001
+      - DB_DIALECT=mysql
     
   db:
     container_name: db
@@ -50,6 +52,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=databasepassword
       - MYSQL_DATABASE=PSEL
+      - DB_DIALECT=mysql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 10s

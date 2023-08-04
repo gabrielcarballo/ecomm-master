@@ -62,7 +62,6 @@ BusinessAccount.init({
   },
 }, {
   underscored: true,
-
   sequelize: db,
   modelName: 'business_accounts',
   timestamps: false,

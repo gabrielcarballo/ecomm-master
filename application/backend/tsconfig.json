@@ -15,9 +15,9 @@
     "skipLibCheck": true,
     "paths": {
       "*": ["node_modules/*"]
-    }
+    },
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "src/db/config/config.js"],
   "exclude": ["src/tests"],
   "clean": true
 }

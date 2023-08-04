@@ -1,17 +1,13 @@
-'use strict';
+const { config } = require('dotenv');
 
-Object.defineProperty(exports, '__esModule', { value: true });
-const config = {
-  dialect: 'mysql',
+config();
+
+module.exports = {
+  dialect: process.env.DB_DIALECT || 'mysql',
   database: 'PSEL',
   host: process.env.DB_HOST || 'localhost',
   password: process.env.DB_PASSWORD || 'databasepassword',
   port: Number(process.env.DB_PORT) || 3306,
-  username: process.env.DB_USER || 'root',
-  dialectOptions: {
-    timezone: 'Z',
-  },
+  username: process.env.DB_USERNAME || 'root',
   logging: false,
 };
-module.exports = config;
-// # sourceMappingURL=config.js.map

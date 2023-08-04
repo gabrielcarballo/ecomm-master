@@ -1,16 +1,18 @@
-import { Options } from 'sequelize';
+import { config } from 'dotenv';
 
-const config: Options = {
-  dialect: 'mysql',
+import { Dialect, Options } from 'sequelize';
+
+config();
+
+const configuration: Options = {
+  dialect: process.env.DB_DIALECT as Dialect,
   database: 'PSEL',
-  host: process.env.DB_HOST || 'localhost',
-  password: process.env.DB_PASSWORD || 'password',
-  port: Number(process.env.DB_PORT) || 3306,
-  username: process.env.DB_USERNAME || 'root',
-  dialectOptions: {
-    timezone: 'Z',
-  },
+  host: process.env.DB_HOST,
+  password: process.env.DB_PASSWORD,
+  port: Number(process.env.DB_PORT),
+  username: process.env.DB_USER,
   logging: false,
-};
 
-export default config;
+};
+console.log('config do TS', configuration);
+export default configuration;

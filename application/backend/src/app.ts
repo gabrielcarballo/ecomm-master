@@ -9,8 +9,8 @@ class App {
   ) {
     this.app = express();
     this.config();
+    this.app.get('/', (req, res) => res.json({ ok: false }));
     this.app.use('/personal', this.PersonalRouter);
-    this.app.get('/', (req, res) => res.json({ ok: true }));
   }
 
   private config():void {
@@ -25,7 +25,7 @@ class App {
     this.app.use(accessControl);
   }
 
-  public start(PORT: string | number):void {
+  public start(PORT: number | string):void {
     this.app.listen(PORT, () => console.log(`Running on port ${PORT}`));
   }
 }
