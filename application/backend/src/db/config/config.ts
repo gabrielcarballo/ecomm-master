@@ -1,18 +1,14 @@
-import { config } from 'dotenv';
+import 'dotenv/config';
 
 import { Dialect, Options } from 'sequelize';
 
-config();
-
-const configuration: Options = {
-  dialect: process.env.DB_DIALECT as Dialect,
+const config: Options = {
+  username: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
   database: 'PSEL',
   host: process.env.DB_HOST,
-  password: process.env.DB_PASSWORD,
   port: Number(process.env.DB_PORT),
-  username: process.env.DB_USER,
-  logging: false,
-
+  dialect: process.env.DB_DIALECT as Dialect,
 };
-console.log('config do TS', configuration);
-export default configuration;
+console.log('config do TS', config);
+export = config;

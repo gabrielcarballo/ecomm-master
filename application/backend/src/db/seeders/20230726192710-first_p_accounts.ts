@@ -1,7 +1,9 @@
 /* eslint-disable max-lines-per-function */
 /** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up(queryInterface, _Sequelize) {
+import { QueryInterface } from 'sequelize';
+
+export = {
+  async up(queryInterface: QueryInterface) {
     await queryInterface.bulkInsert('personal_accounts', [{
       cpf: '12345678910',
       name: 'John Doe',
@@ -65,7 +67,7 @@ module.exports = {
     ], {});
   },
 
-  async down(queryInterface, _Sequelize) {
-    await queryInterface.bulkDelete('personal_accounts', null, {});
+  async down(queryInterface: QueryInterface) {
+    await queryInterface.bulkDelete('personal_accounts', {});
   },
 };

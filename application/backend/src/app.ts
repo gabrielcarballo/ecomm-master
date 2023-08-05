@@ -7,7 +7,7 @@ class App {
   constructor(
     private PersonalRouter = PersonalAccountManager,
   ) {
-    this.app = express();
+    this.app = express.default();
     this.config();
     this.app.get('/', (req, res) => res.json({ ok: false }));
     this.app.use('/personal', this.PersonalRouter);

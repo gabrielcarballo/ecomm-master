@@ -1,7 +1,10 @@
 /* eslint-disable max-lines-per-function */
+
+import { QueryInterface } from 'sequelize';
+
 /** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up(queryInterface, _Sequelize) {
+export = {
+  async up(queryInterface: QueryInterface) {
     await queryInterface.bulkInsert('business_accounts', [
       {
         cnpj: '12345678910111',
@@ -66,7 +69,7 @@ module.exports = {
     ], {});
   },
 
-  async down(queryInterface, _Sequelize) {
-    await queryInterface.bulkDelete('business_accounts', null, {});
+  async down(queryInterface: QueryInterface) {
+    await queryInterface.bulkDelete('business_accounts', {});
   },
 };

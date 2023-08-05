@@ -30,11 +30,11 @@ services:
       - ./backend:/application/backend
     stdin_open: true
     tty: true
+    command: dev
     depends_on:
       db:
         condition: service_healthy
     restart: 'on-failure'
-    command: dev
     environment:
       - JWT_SECRET=bruebiel
       - DB_HOST=db
@@ -52,7 +52,6 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=databasepassword
       - MYSQL_DATABASE=PSEL
-      - DB_DIALECT=mysql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 10s
