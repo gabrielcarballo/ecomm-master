@@ -1,4 +1,4 @@
-import * as express from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import PersonalAccountManager from './routes/personalAccount.route';
 
 class App {
@@ -7,14 +7,18 @@ class App {
   constructor(
     private PersonalRouter = PersonalAccountManager,
   ) {
-    this.app = express.default();
+    this.app = express();
     this.config();
-    this.app.get('/', (req, res) => res.json({ ok: false }));
+    this.app.get('/', (req: Request, res: Response) => res.json({ ok: true }));
     this.app.use('/personal', this.PersonalRouter);
   }
 
   private config():void {
-    const accessControl: express.RequestHandler = (req, res, next) => {
+    const accessControl: express.RequestHandler = (
+      req: Request,
+      res: Response,
+      next: NextFunction,
+    ) => {
       res.header('Access-Control-Allow-Origin', '*');
       res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS,PUT,PATCH');
       res.header('Access-Control-Allow-Headers', '*');

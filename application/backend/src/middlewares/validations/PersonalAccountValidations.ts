@@ -10,9 +10,8 @@ import personalAccountSchema from './schemas/PersonalAccountSchema';
 const PersonalAccountValidation = (
   async (req: Request, res: Response, next: NextFunction) => {
     const { error } = personalAccountSchema.validate(req.body);
-    console.log('CHEGOU NO ERRO', error);
     if (error) {
-      console.log('SAIU DO ERRO', error);
+      console.log(error);
       return res.status(errorMap(error.details[0].type))
         .json({ error: error.details[0].message });
       // return {

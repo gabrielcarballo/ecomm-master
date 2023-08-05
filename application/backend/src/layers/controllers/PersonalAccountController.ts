@@ -3,6 +3,8 @@ import PersonalAccountService from '../services/PersonalAccountService';
 
 export default class PersonalAccountController {
   public static async createAccount(req: Request, res: Response, _next: NextFunction) {
+    console.log('controller', req.body);
+
     try {
       const account = await PersonalAccountService.createAccount(req.body);
       console.log('controller', account);
