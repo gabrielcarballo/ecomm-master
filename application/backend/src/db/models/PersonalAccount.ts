@@ -2,15 +2,6 @@ import { Model, STRING, BOOLEAN, INTEGER } from 'sequelize';
 import db from '.';
 import CPF from '../../entities/CPF';
 
-// interface PersonalAccountAttributes {
-//   id: number,
-//   cpf: string,
-//   name: string,
-//   email: string,
-//   password: string,
-//   status: boolean,
-// }
-
 export default class PersonalAccount extends Model {
   declare public id: number;
   declare public cpf: string;

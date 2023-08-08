@@ -1,3 +1,4 @@
+import { ConflictError } from '../../helpers/errorHandler/errorHandler';
 import PersonalAccount from '../../db/models/PersonalAccount';
 import { PersonalAccountAtt } from '../../middlewares/validations/schemas/PersonalAccountSchema';
 
@@ -12,15 +13,22 @@ export default class PersonalAccountModel {
   public static async createAccount(
     { cpf, email, name, password }: PersonalAccountAtt,
   ): Promise<PersonalAccount | null> {
+    const accountExists = await this.getAccountByCpf({ cpf });
+    if (accountExists) {
+      throw new ConflictError('ACCOUNT_ALREADY_EXISTS');
+    }
     const accountToAdd = await PersonalAccount.create({
       cpf,
       email,
       name,
       password,
     });
-    if (!accountToAdd) {
-      throw new Error('Data not created');
-    }
     return accountToAdd;
+  }
+
+  public static async getAccountByCpf(
+    cpf: Pick<PersonalAccountAtt, 'cpf'>,
+  ): Promise<PersonalAccount | null> {
+    return PersonalAccount.findOne({ where: cpf });
   }
 }

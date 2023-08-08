@@ -1,5 +1,8 @@
+import 'express-async-errors';
 import express, { NextFunction, Request, Response } from 'express';
 import PersonalAccountManager from './routes/personalAccount.route';
+import { ErrorHandler } from './helpers/errorHandler/errorHandler';
+// import errorMap from './utils/ErrorMap/accountErrorMap';
 
 class App {
   public app: express.Express;
@@ -11,6 +14,8 @@ class App {
     this.config();
     this.app.get('/', (req: Request, res: Response) => res.json({ ok: true }));
     this.app.use('/personal', this.PersonalRouter);
+
+    this.app.use(this.errorHandler);
   }
 
   private config():void {
@@ -31,6 +36,18 @@ class App {
 
   public start(PORT: number | string):void {
     this.app.listen(PORT, () => console.log(`Running on port ${PORT}`));
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  private errorHandler(
+    error: Error & Partial<ErrorHandler>,
+    _req: Request,
+    res: Response,
+    _next: NextFunction,
+  ): void {
+    const statusCode = error.statusCode || 500;
+    const message = error.message || 'Internal server error';
+    res.status(statusCode).json({ error: message });
   }
 }
 
