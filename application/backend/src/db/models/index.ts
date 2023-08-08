@@ -1,6 +1,8 @@
 import { Sequelize } from 'sequelize';
-import * as config from '../config/config';
+import config from '../config/config';
 
-const sequelize = new Sequelize(config.default);
+console.log('config no index', config);
+
+const sequelize = new Sequelize(config);
 
 export default sequelize;

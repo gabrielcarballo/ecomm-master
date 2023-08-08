@@ -30,9 +30,11 @@ services:
       - ./backend:/application/backend
     stdin_open: true
     tty: true
+    command: dev
     depends_on:
       db:
         condition: service_healthy
+    restart: 'on-failure'
     environment:
       - JWT_SECRET=bruebiel
       - DB_HOST=db
@@ -40,9 +42,10 @@ services:
       - DB_USER=root
       - DB_PASSWORD=databasepassword
       - APP_PORT=3001
+      - DB_DIALECT=mysql
     
   db:
-    container_name: ecom-db
+    container_name: db
     image: mysql:8.0.32
     ports:
       - "3306:3306"
@@ -53,6 +56,6 @@ services:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 10s
       retries: 5
-    restart: always
+    restart: 'always'
     cap_add:
       - SYS_NICE
