@@ -1,4 +1,5 @@
 import { Model, STRING, BOOLEAN, INTEGER } from 'sequelize';
+import { ConflictError } from '../../helpers/errorHandler/errorHandler';
 import db from '.';
 import CPF from '../../entities/CPF';
 
@@ -29,7 +30,8 @@ PersonalAccount.init({
       isCpf(cpf: string) {
         const isValid = new CPF(cpf).validateCpf();
         if (!isValid) {
-          throw new Error('CPF inválido');
+          console.log('CPF inválido');
+          throw new ConflictError('CPF inválido');
         }
       },
     },

@@ -2,25 +2,27 @@ import 'express-async-errors';
 import express, { NextFunction, Request, Response } from 'express';
 import PersonalAccountManager from './routes/personalAccount.route';
 import { ErrorHandler } from './helpers/errorHandler/errorHandler';
-// import errorMap from './utils/ErrorMap/accountErrorMap';
+import BusinessAccountManager from './routes/businessAccount.route';
 
 class App {
   public app: express.Express;
 
   constructor(
     private PersonalRouter = PersonalAccountManager,
+    private BusinessRouter = BusinessAccountManager,
   ) {
     this.app = express();
     this.config();
-    this.app.get('/', (req: Request, res: Response) => res.json({ ok: true }));
+    this.app.get('/', (_req: Request, res: Response) => res.json({ ok: true }));
     this.app.use('/personal', this.PersonalRouter);
+    this.app.use('/business', this.BusinessRouter);
 
     this.app.use(this.errorHandler);
   }
 
   private config():void {
     const accessControl: express.RequestHandler = (
-      req: Request,
+      _req: Request,
       res: Response,
       next: NextFunction,
     ) => {

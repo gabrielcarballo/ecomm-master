@@ -2,16 +2,7 @@ import { Model, STRING, BOOLEAN, INTEGER } from 'sequelize';
 import db from '.';
 import CNPJ from '../../entities/CNPJ';
 
-interface BusinessAccountAttributes {
-  id: number,
-  cnpj: string,
-  name: string,
-  email: string,
-  password: string,
-  status: boolean,
-}
-
-class BusinessAccount extends Model<BusinessAccountAttributes> {
+export default class BusinessAccount extends Model {
   declare public id: number;
   declare public cnpj: string;
   declare public name: string;
