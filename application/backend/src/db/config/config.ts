@@ -10,5 +10,4 @@ const config: Options = {
   port: Number(process.env.DB_PORT),
   dialect: process.env.DB_DIALECT as Dialect,
 };
-console.log('config do TS', config);
 export = config;
