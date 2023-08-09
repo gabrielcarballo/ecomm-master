@@ -1,6 +1,7 @@
 import { ConflictError } from '../../helpers/errorHandler/errorHandler';
 import PersonalAccount from '../../db/models/PersonalAccount';
 import { PersonalAccountAtt } from '../../middlewares/validations/schemas/PersonalAccountSchema';
+import { payloadType } from '../../auth/index';
 
 /**
  *
@@ -30,5 +31,21 @@ export default class PersonalAccountModel {
     cpf: Pick<PersonalAccountAtt, 'cpf'>,
   ): Promise<PersonalAccount | null> {
     return PersonalAccount.findOne({ where: cpf });
+  }
+
+  public static async getAccountToLogin(
+    email: string,
+    password: string,
+  ): Promise<PersonalAccount | null> {
+    return PersonalAccount.findOne({ where: { email, password } });
+  }
+
+  public static async loginUser(payload: payloadType) {
+    const { email, password } = payload;
+    const isUserValid = await this.getAccountToLogin(email, password);
+    if (isUserValid) {
+      return true;
+    }
+    throw new ConflictError('Email or password is invalid');
   }
 }

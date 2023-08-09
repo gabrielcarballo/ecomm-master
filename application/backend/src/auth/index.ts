@@ -1,4 +1,4 @@
-import JWT, { SignOptions, JwtPayload } from 'jsonwebtoken';
+import JWT, { SignOptions } from 'jsonwebtoken';
 
 const secret = process.env.JWT_SECRET || 'secret';
 
@@ -7,6 +7,13 @@ const options: SignOptions = {
   expiresIn: '10d',
 };
 
-export const createToken = (payload: JwtPayload) => JWT.sign(payload, secret, options);
+export type payloadType = {
+  email: string;
+  password: string;
+};
+
+export const createToken = (
+  { email, password }: payloadType,
+) => JWT.sign({ email, password }, secret, options);
 
 export const verifyToken = (token: string) => JWT.verify(token, secret);

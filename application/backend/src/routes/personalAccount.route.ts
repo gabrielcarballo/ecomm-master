@@ -1,5 +1,6 @@
 import * as express from 'express';
 import { Request, Response, NextFunction } from 'express';
+// import authMiddleware from '../auth/authMiddleware';
 import PersonalAccountController from '../layers/controllers/PersonalAccountController';
 import PersonalAccountValidation from '../middlewares/validations/PersonalAccountValidations';
 
@@ -12,6 +13,12 @@ PersonalAccountRouter.post(
   (req: Request, res: Response, next: NextFunction) =>
     PersonalAccountController.createAccount(req, res, next)
   ,
+);
+
+PersonalAccountRouter.post(
+  '/login',
+  (req: Request, res: Response, next: NextFunction) =>
+    PersonalAccountController.loginUser(req, res, next),
 );
 
 export default PersonalAccountRouter;
