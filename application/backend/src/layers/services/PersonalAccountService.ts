@@ -3,7 +3,7 @@ import PersonalAccountModel from '../model/PersonalAccountModel';
 import { PersonalAccountAtt } from '../../middlewares/validations/schemas/PersonalAccountSchema';
 import { payloadType } from '../../auth/index';
 
-class PersonalAccountService {
+export default class PersonalAccountService {
   public static async createAccount(
     account: PersonalAccountAtt,
   ): Promise<PersonalAccount | null> {
@@ -14,8 +14,7 @@ class PersonalAccountService {
   public static async loginUser(
     payload: payloadType,
   ): Promise<boolean> {
-    const token = await PersonalAccountModel.loginUser(payload);
-    return token;
+    const isUserValid = await PersonalAccountModel.loginUser(payload);
+    return isUserValid;
   }
 }
-export default PersonalAccountService;

@@ -1,6 +1,7 @@
 import { BusinessAccountAtt } from '../../middlewares/validations/schemas/BusinessAccountSchema';
 import BusinessAccount from '../../db/models/BusinessAccount';
 import BusinessAccountModel from '../model/BusinessAccountModel';
+import { payloadType } from '../../auth/index';
 
 export default class BusinessAccountService {
   public static async createAccount(
@@ -11,5 +12,13 @@ export default class BusinessAccountService {
     });
 
     return account;
+  }
+
+  public static async loginUser(
+    payload: payloadType,
+  ): Promise<boolean> {
+    const { email, password } = payload;
+    const isUserValid = await BusinessAccountModel.loginUser(email, password);
+    return isUserValid;
   }
 }

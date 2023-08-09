@@ -31,4 +31,19 @@ export default class PersonalAccountModel {
   ): Promise<BusinessAccount | null> {
     return BusinessAccount.findOne({ where: cnpj });
   }
+
+  public static async getAccountToLogin(
+    email: string,
+    password: string,
+  ): Promise<BusinessAccount | null> {
+    return BusinessAccount.findOne({ where: { email, password } });
+  }
+
+  public static async loginUser(email: string, password: string) {
+    const isUserValid = await this.getAccountToLogin(email, password);
+    if (isUserValid) {
+      return true;
+    }
+    throw new ConflictError('Email or password is invalid');
+  }
 }

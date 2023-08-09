@@ -20,7 +20,7 @@ export default class PersonalAccountController {
     if (isUserValid) {
       const token = createToken({ email, password });
       req.headers.authorization = token;
-      return res.status(200).json(
+      return res.status(201).json(
         { message: 'Login successfully', content: token },
       );
     }
