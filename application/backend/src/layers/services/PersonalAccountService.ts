@@ -1,7 +1,9 @@
+import UpdateAccountRequest from '../../types/updateAccount.request';
+import { BadRequestError } from '../../helpers/errorHandler/errorHandler';
 import PersonalAccount from '../../db/models/PersonalAccount';
 import PersonalAccountModel from '../model/PersonalAccountModel';
 import { PersonalAccountAtt } from '../../middlewares/validations/schemas/PersonalAccountSchema';
-import { payloadType } from '../../auth/index';
+import { decodeToken, payloadType, DecodedPayloadType } from '../../auth/index';
 
 export default class PersonalAccountService {
   public static async createAccount(
@@ -17,4 +19,27 @@ export default class PersonalAccountService {
     const isUserValid = await PersonalAccountModel.loginUser(payload);
     return isUserValid;
   }
+
+  public static async updateAccount(
+    info: UpdateAccountRequest,
+  ) {
+    const { email, name, password, authorization } = info;
+    if (!email && !name && !password) {
+      throw new BadRequestError('Updated info must be provided');
+    }
+    const newInfo = { email, name, password };
+    const { payload: {
+      email: currentEmail,
+      password: currentPassword } } = decodeToken(authorization) as DecodedPayloadType;
+
+    if (currentEmail && currentPassword) {
+      const updatedAccount = await PersonalAccountModel.updateAccount(
+        newInfo,
+        { email: currentEmail, password: currentPassword },
+      );
+      return updatedAccount;
+    }
+  }
 }
+/// DECODAR TOKEN COM DECODETOKEN E PASSAR A INFORMAÇÂO ANTIGA PARA
+// BUSCA E A NOVA PARA PERSISTENCIA

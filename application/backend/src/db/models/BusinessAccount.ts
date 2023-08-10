@@ -57,3 +57,9 @@ BusinessAccount.init({
   modelName: 'business_accounts',
   timestamps: false,
 });
+
+BusinessAccount.addHook('beforeUpdate', async (model: BusinessAccount, _options) => {
+  if (model.changed('cnpj')) {
+    throw new Error('Cannot update CNPJ attribute.');
+  }
+});

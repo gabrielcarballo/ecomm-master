@@ -61,3 +61,7 @@ PersonalAccount.init({
   modelName: 'personal_accounts',
   timestamps: false,
 });
+
+PersonalAccount.addHook('beforeUpdate', (model: PersonalAccount, _options) => {
+  if (model.changed('cpf')) throw new Error('Cannot update CPF attribute.');
+});

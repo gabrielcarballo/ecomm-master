@@ -1,4 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
+import { BadRequestError } from '../../helpers/errorHandler/errorHandler';
+import UpdateAccountRequest from '../../types/updateAccount.request';
 import PersonalAccountService from '../services/PersonalAccountService';
 import { createToken, payloadType } from '../../auth/index';
 import { PersonalAccountAtt } from '../../middlewares/validations/schemas/PersonalAccountSchema';
@@ -24,5 +26,14 @@ export default class PersonalAccountController {
         { message: 'Login successfully', content: token },
       );
     }
+  }
+
+  public static async updateAccount(req: Request, res: Response, _next: NextFunction) {
+    const info = req.headers as unknown as UpdateAccountRequest;
+    const updatedAccount = await PersonalAccountService.updateAccount(info);
+    if (updatedAccount?.[0] === 0) throw new BadRequestError('Your account could not be changed');
+    return res.status(200).json(
+      { message: 'Account successfully updated. Please do login again' },
+    );
   }
 }
