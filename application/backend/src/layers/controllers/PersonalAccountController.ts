@@ -36,4 +36,13 @@ export default class PersonalAccountController {
       { message: 'Account successfully updated. Please do login again' },
     );
   }
+
+  public static async deleteAccount(req: Request, res: Response, _next: NextFunction) {
+    const { authorization } = req.headers;
+    const deletedAccount = await PersonalAccountService.deleteAccount(authorization || '');
+    if (deletedAccount?.[0] === 0) throw new BadRequestError('Your account could not be deleted');
+    return res.status(200).json(
+      { message: 'Account deleted successfully' },
+    );
+  }
 }

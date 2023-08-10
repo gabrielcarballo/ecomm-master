@@ -29,4 +29,12 @@ PersonalAccountRouter.patch(
     PersonalAccountController.updateAccount(req, res, next),
 );
 
+PersonalAccountRouter.delete(
+  '/delete',
+  (req: Request, res: Response, next: NextFunction) =>
+    authMiddleware(req, res, next),
+  (req: Request, res: Response, next: NextFunction) =>
+    PersonalAccountController.deleteAccount(req, res, next),
+);
+
 export default PersonalAccountRouter;

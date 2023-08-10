@@ -70,4 +70,16 @@ export default class PersonalAccountModel {
     console.log(updatedAccount);
     return updatedAccount;
   }
+
+  public static async deleteAccount({ email, password }: payloadType) {
+    const deletedAccount = await PersonalAccount.update({
+      status: false, deletedAt: new Date(),
+    }, {
+      where: {
+        email,
+        password,
+      },
+    });
+    return deletedAccount;
+  }
 }

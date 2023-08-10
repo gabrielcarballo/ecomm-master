@@ -40,6 +40,10 @@ export default class PersonalAccountService {
       return updatedAccount;
     }
   }
+
+  public static async deleteAccount(auth: string) {
+    const { payload: { email, password } } = decodeToken(auth) as DecodedPayloadType;
+    const deletedAccount = await PersonalAccountModel.deleteAccount({ email, password });
+    return deletedAccount;
+  }
 }
-/// DECODAR TOKEN COM DECODETOKEN E PASSAR A INFORMAÇÂO ANTIGA PARA
-// BUSCA E A NOVA PARA PERSISTENCIA
