@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import UpdateAccountRequest from '../../types/updateAccount.request';
 import { payloadType, createToken } from '../../auth/index';
 import BusinessAccountService from '../services/BusinessAccountService';
 import { BusinessAccountAtt } from '../../middlewares/validations/schemas/BusinessAccountSchema';
@@ -28,5 +29,14 @@ export default class BusinessAccountController {
         { message: 'Login successfully', content: token },
       );
     }
+  }
+
+  public static async updateAccount(req: Request, res: Response, _next: NextFunction) {
+    const info = req.headers as unknown as UpdateAccountRequest;
+    const account = await BusinessAccountService.updateAccount(info);
+    if (account?.[0] === 0) throw new Error('Your account could not be changed');
+    return res.status(201).json(
+      { message: 'Account updated successfully. Please do login again' },
+    );
   }
 }

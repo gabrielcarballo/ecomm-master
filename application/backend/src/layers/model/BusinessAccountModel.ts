@@ -1,6 +1,8 @@
+import UpdateAccountRequest from '../../types/updateAccount.request';
 import { ConflictError } from '../../helpers/errorHandler/errorHandler';
 import BusinessAccount from '../../db/models/BusinessAccount';
 import { BusinessAccountAtt } from '../../middlewares/validations/schemas/BusinessAccountSchema';
+import { payloadType } from '../../auth';
 
 /**
  *
@@ -45,5 +47,26 @@ export default class PersonalAccountModel {
       return true;
     }
     throw new ConflictError('Email or password is invalid');
+  }
+
+  public static async updateAccount(
+    newInfo: Omit<UpdateAccountRequest, 'authorization'>,
+    currentInfo: payloadType,
+  ) {
+    const { email: newEmail, name: newName, password: newPassword } = newInfo;
+    const { email, password } = currentInfo;
+    console.log('novos', newEmail, newName, newPassword);
+    console.group('atuais', email, password);
+    const updatedAccount = await BusinessAccount.update(
+      { email: newEmail, name: newName, password: newPassword },
+      { where:
+        {
+          email,
+          password,
+        },
+      },
+    );
+    console.log(updatedAccount);
+    return updatedAccount;
   }
 }

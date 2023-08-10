@@ -32,7 +32,7 @@ export default class PersonalAccountController {
     const info = req.headers as unknown as UpdateAccountRequest;
     const updatedAccount = await PersonalAccountService.updateAccount(info);
     if (updatedAccount?.[0] === 0) throw new BadRequestError('Your account could not be changed');
-    return res.status(200).json(
+    return res.status(201).json(
       { message: 'Account successfully updated. Please do login again' },
     );
   }
