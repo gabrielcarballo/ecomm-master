@@ -1,4 +1,4 @@
-import { Model, STRING, BOOLEAN, INTEGER } from 'sequelize';
+import { Model, DataTypes } from 'sequelize';
 import { ConflictError } from '../../helpers/errorHandler/errorHandler';
 import db from '.';
 import CPF from '../../entities/CPF';
@@ -14,7 +14,7 @@ export default class PersonalAccount extends Model {
 
 PersonalAccount.init({
   id: {
-    type: INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: false,
     unique: true,
     primaryKey: true,
@@ -23,7 +23,7 @@ PersonalAccount.init({
     onDelete: 'CASCADE',
   },
   cpf: {
-    type: STRING,
+    type: DataTypes.STRING,
     allowNull: false,
     unique: true,
     validate: {
@@ -38,20 +38,20 @@ PersonalAccount.init({
   },
 
   name: {
-    type: STRING,
+    type: DataTypes.STRING,
     allowNull: false,
   },
   email: {
-    type: STRING,
+    type: DataTypes.STRING,
     allowNull: false,
     unique: true,
   },
   password: {
-    type: STRING,
+    type: DataTypes.STRING,
     allowNull: false,
   },
   status: {
-    type: BOOLEAN,
+    type: DataTypes.BOOLEAN,
     allowNull: false,
     defaultValue: true,
   },

@@ -69,4 +69,14 @@ export default class PersonalAccountModel {
     console.log(updatedAccount);
     return updatedAccount;
   }
+
+  public static async deleteAccount({ email, password }: payloadType) {
+    const deletedAccount = await BusinessAccount.update({
+      status: false, deletedAt: new Date(),
+    }, { where: { email, password } });
+    if (!deletedAccount) {
+      throw new ConflictError('Account not found');
+    }
+    return deletedAccount;
+  }
 }

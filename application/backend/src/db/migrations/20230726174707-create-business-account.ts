@@ -13,7 +13,7 @@ export async function up(queryInterface: QueryInterface): Promise<void> {
     name: { type: DataTypes.STRING },
     email: { type: DataTypes.STRING },
     password: { type: DataTypes.STRING },
-    status: { type: DataTypes.BOOLEAN },
+    status: { type: DataTypes.BOOLEAN, defaultValue: true, allowNull: false },
     createdAt: { allowNull: false,
       type: DataTypes.DATE,
       defaultValue: new Date() },

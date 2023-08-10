@@ -39,4 +39,13 @@ export default class BusinessAccountController {
       { message: 'Account updated successfully. Please do login again' },
     );
   }
+
+  public static async deleteAccount(req: Request, res: Response, _next: NextFunction) {
+    const { authorization } = req.headers;
+    const account = await BusinessAccountService.deleteAccount(authorization || '');
+    if (account?.[0] === 0) throw new Error('Your account could not be deleted');
+    return res.status(200).json(
+      { message: 'Account deleted successfully' },
+    );
+  }
 }

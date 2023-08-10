@@ -11,7 +11,6 @@ export default class BusinessAccountService {
     const account = await BusinessAccountModel.createAccount({
       name, cnpj, email, password,
     });
-
     return account;
   }
 
@@ -40,5 +39,11 @@ export default class BusinessAccountService {
       );
       return updatedAccount;
     }
+  }
+
+  public static async deleteAccount(auth: string) {
+    const { payload: { email, password } } = decodeToken(auth) as DecodedPayloadType;
+    const deletedAccount = await BusinessAccountModel.deleteAccount({ email, password });
+    return deletedAccount;
   }
 }

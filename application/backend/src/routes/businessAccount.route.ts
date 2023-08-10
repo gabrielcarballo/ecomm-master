@@ -29,4 +29,12 @@ BusinessAccountRouter.patch(
     BusinessAccountController.updateAccount(req, res, next),
 );
 
+BusinessAccountRouter.delete(
+  '/delete',
+  (req: Request, res: Response, next: NextFunction) =>
+    authMiddleware(req, res, next),
+  (req: Request, res: Response, next: NextFunction) =>
+    BusinessAccountController.deleteAccount(req, res, next),
+);
+
 export default BusinessAccountRouter;
