@@ -70,8 +70,6 @@ PersonalAccount.init({
   },
 }, {
   underscored: true,
-  createdAt: 'created_at',
-  updatedAt: 'updated_at',
   sequelize: db,
   modelName: 'personal_accounts',
   timestamps: true,
