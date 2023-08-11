@@ -1,6 +1,7 @@
 /* eslint-disable max-lines-per-function */
 
 import { QueryInterface } from 'sequelize';
+import { v4 as uuidv4 } from 'uuid';
 
 /** @type {import('sequelize-cli').Migration} */
 export = {
@@ -12,6 +13,8 @@ export = {
         email: 'abc@example.com',
         password: 'abcdef123',
         status: 1,
+        balance: 0,
+        accountNumber: uuidv4(),
       },
       {
         cnpj: '98765432101122',
@@ -19,6 +22,8 @@ export = {
         email: 'xyz@example.com',
         password: 'qwerty123',
         status: 1,
+        balance: 0,
+        accountNumber: uuidv4(),
       },
       {
         cnpj: '56789012345678',
@@ -26,6 +31,8 @@ export = {
         email: 'acme@example.com',
         password: 'test123',
         status: 1,
+        balance: 0,
+        accountNumber: uuidv4(),
       },
       {
         cnpj: '90817263544553',
@@ -33,6 +40,8 @@ export = {
         email: 'tech@example.com',
         password: 'hello123',
         status: 1,
+        balance: 0,
+        accountNumber: uuidv4(),
       },
       {
         cnpj: '11223344556677',
@@ -40,6 +49,8 @@ export = {
         email: 'global@example.com',
         password: 'test456',
         status: 1,
+        balance: 0,
+        accountNumber: uuidv4(),
       },
       {
         cnpj: '19283746550192',
@@ -47,6 +58,8 @@ export = {
         email: 'innovative@example.com',
         password: 'abc123',
         status: 1,
+        balance: 0,
+        accountNumber: uuidv4(),
       },
       {
         cnpj: '99887766554433',
@@ -54,6 +67,8 @@ export = {
         email: 'datatech@example.com',
         password: 'qwerty456',
         status: 1,
+        balance: 0,
+        accountNumber: uuidv4(),
       },
       {
         cnpj: '45362718911098',
@@ -61,6 +76,8 @@ export = {
         email: 'alpha@example.com',
         password: 'hello456',
         status: 1,
+        balance: 0,
+        accountNumber: uuidv4(),
       },
       {
         cnpj: '76543210987654',
@@ -68,6 +85,8 @@ export = {
         email: 'techville@example.com',
         password: 'test789',
         status: 1,
+        balance: 0,
+        accountNumber: uuidv4(),
       },
       {
         cnpj: '11121314151617',
@@ -75,8 +94,10 @@ export = {
         email: 'innovatech@example.com',
         password: 'abcdef789',
         status: 1,
+        balance: 0,
+        accountNumber: uuidv4(),
       },
-    ], {});
+    ]);
   },
 
   async down(queryInterface: QueryInterface) {

@@ -1,4 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
+import { v4 as uuidv4 } from 'uuid';
 import { ConflictError } from '../../helpers/errorHandler/errorHandler';
 import db from '.';
 import CPF from '../../entities/CPF';
@@ -10,6 +11,7 @@ export default class PersonalAccount extends Model {
   declare public email: string;
   declare public password: string;
   declare public status: boolean;
+  declare public balance: number;
 }
 
 PersonalAccount.init({
@@ -55,11 +57,22 @@ PersonalAccount.init({
     allowNull: false,
     defaultValue: true,
   },
+  balance: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+    defaultValue: 0,
+  },
+  accountNumber: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+    defaultValue: () => uuidv4(),
+  },
 }, {
   underscored: true,
   sequelize: db,
   modelName: 'personal_accounts',
-  timestamps: false,
+  timestamps: true,
 });
 
 PersonalAccount.addHook('beforeUpdate', (model: PersonalAccount, _options) => {

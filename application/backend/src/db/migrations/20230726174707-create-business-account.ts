@@ -1,5 +1,6 @@
 /* eslint-disable max-lines-per-function */
 import { DataTypes, QueryInterface } from 'sequelize';
+import { v4 as uuidv4 } from 'uuid';
 
 export async function up(queryInterface: QueryInterface): Promise<void> {
   await queryInterface.createTable('business_accounts', {
@@ -22,7 +23,14 @@ export async function up(queryInterface: QueryInterface): Promise<void> {
       type: DataTypes.DATE,
       defaultValue: new Date(),
     },
-  });
+    balance: { type: DataTypes.FLOAT, defaultValue: 0, allowNull: false },
+    accountNumber: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      defaultValue: () => uuidv4(),
+    },
+  }, {});
 }
 
 export async function down(queryInterface: QueryInterface) {

@@ -64,7 +64,7 @@
     "object-curly-newline": "off",
     "max-params": [
       "error",
-      4
+      7
     ],
     "max-lines": [
       "error",
@@ -73,7 +73,7 @@
     "max-lines-per-function": [
       "error",
       {
-        "max": 20,
+        "max": 30,
         "skipBlankLines": true,
         "skipComments": true
       }

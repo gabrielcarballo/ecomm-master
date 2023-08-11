@@ -1,6 +1,7 @@
 /* eslint-disable max-lines-per-function */
 /** @type {import('sequelize-cli').Migration} */
 import { QueryInterface } from 'sequelize';
+import { v4 as uuidv4 } from 'uuid';
 
 export = {
   async up(queryInterface: QueryInterface) {
@@ -10,6 +11,8 @@ export = {
       email: 'johndoe@gmail.com',
       password: '123456',
       status: 1,
+      balance: 0,
+      accountNumber: uuidv4(),
     },
     {
       cpf: '98765432101',
@@ -17,6 +20,8 @@ export = {
       email: 'alicejohnson@yahoo.com',
       password: 'qwerty',
       status: 1,
+      balance: 0,
+      accountNumber: uuidv4(),
     },
     {
       cpf: '56789012345',
@@ -24,6 +29,8 @@ export = {
       email: 'michaelsmith@hotmail.com',
       password: 'abcdef',
       status: 1,
+      balance: 0,
+      accountNumber: uuidv4(),
     },
     {
       cpf: '90817263544',
@@ -31,6 +38,8 @@ export = {
       email: 'emmawilliams@gmail.com',
       password: 'password',
       status: 1,
+      balance: 0,
+      accountNumber: uuidv4(),
     },
     {
       cpf: '12309876543',
@@ -38,6 +47,8 @@ export = {
       email: 'davidbrown@yahoo.com',
       password: 'test123',
       status: 1,
+      balance: 0,
+      accountNumber: uuidv4(),
     },
     {
       cpf: '19283746550',
@@ -45,6 +56,8 @@ export = {
       email: 'oliviajones@hotmail.com',
       password: 'hello123',
       status: 1,
+      balance: 0,
+      accountNumber: uuidv4(),
     },
     {
       cpf: '11223344556',
@@ -52,6 +65,8 @@ export = {
       email: 'michaeljohnson@gmail.com',
       password: 'qwerty123',
       status: 1,
+      balance: 0,
+      accountNumber: uuidv4(),
     },
     {
       cpf: '99887766554',
@@ -59,6 +74,8 @@ export = {
       email: 'alicesmith@yahoo.com',
       password: 'abc123',
       status: 1,
+      balance: 0,
+      accountNumber: uuidv4(),
     },
     {
       cpf: '45362718911',
@@ -66,6 +83,8 @@ export = {
       email: 'davidjohnson@hotmail.com',
       password: 'test456',
       status: 1,
+      balance: 0,
+      accountNumber: uuidv4(),
     },
     {
       cpf: '76543210987',
@@ -73,8 +92,10 @@ export = {
       email: 'emmabrown@gmail.com',
       password: 'abcdef123',
       status: 1,
+      balance: 0,
+      accountNumber: uuidv4(),
     },
-    ], { });
+    ]);
   },
 
   async down(queryInterface: QueryInterface) {
