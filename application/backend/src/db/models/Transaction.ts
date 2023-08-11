@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Model, DataTypes } from 'sequelize';
-// import CNPJ from '../../entities/CNPJ';
 import db from '.';
 import CPF from '../../entities/CPF';
 
@@ -38,10 +38,16 @@ Transaction.init({
   sender: {
     type: DataTypes.STRING,
     allowNull: false,
+    validate: {
+      isUUID: 4,
+    },
   },
   receiver: {
     type: DataTypes.STRING,
     allowNull: false,
+    validate: {
+      isUUID: 4,
+    },
   },
   cashback: {
     type: DataTypes.FLOAT,
