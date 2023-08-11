@@ -17,11 +17,13 @@ export async function up(queryInterface: QueryInterface): Promise<void> {
     status: { type: DataTypes.BOOLEAN, defaultValue: true, allowNull: false },
     createdAt: { allowNull: false,
       type: DataTypes.DATE,
-      defaultValue: new Date() },
+      defaultValue: new Date(),
+      field: 'created_at' },
     updatedAt: {
       allowNull: false,
       type: DataTypes.DATE,
       defaultValue: new Date(),
+      field: 'updated_at',
     },
     balance: { type: DataTypes.FLOAT, defaultValue: 0, allowNull: false },
     accountNumber: {
@@ -29,6 +31,7 @@ export async function up(queryInterface: QueryInterface): Promise<void> {
       allowNull: false,
       unique: true,
       defaultValue: () => uuidv4(),
+      field: 'account_number',
     },
   }, {});
 }

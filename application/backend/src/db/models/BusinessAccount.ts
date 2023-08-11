@@ -68,6 +68,8 @@ BusinessAccount.init({
 }, {
   underscored: true,
   sequelize: db,
+  createdAt: 'created_at',
+  updatedAt: 'updated_at',
   modelName: 'business_accounts',
   timestamps: true,
 });

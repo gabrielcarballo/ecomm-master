@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable max-lines-per-function */
 /** @type {import('sequelize-cli').Migration} */
 import { QueryInterface } from 'sequelize';
@@ -12,7 +13,7 @@ export = {
       password: '123456',
       status: 1,
       balance: 0,
-      accountNumber: uuidv4(),
+      account_number: uuidv4(),
     },
     {
       cpf: '98765432101',
@@ -21,7 +22,7 @@ export = {
       password: 'qwerty',
       status: 1,
       balance: 0,
-      accountNumber: uuidv4(),
+      account_number: uuidv4(),
     },
     {
       cpf: '56789012345',
@@ -30,7 +31,7 @@ export = {
       password: 'abcdef',
       status: 1,
       balance: 0,
-      accountNumber: uuidv4(),
+      account_number: uuidv4(),
     },
     {
       cpf: '90817263544',
@@ -39,7 +40,7 @@ export = {
       password: 'password',
       status: 1,
       balance: 0,
-      accountNumber: uuidv4(),
+      account_number: uuidv4(),
     },
     {
       cpf: '12309876543',
@@ -48,7 +49,7 @@ export = {
       password: 'test123',
       status: 1,
       balance: 0,
-      accountNumber: uuidv4(),
+      account_number: uuidv4(),
     },
     {
       cpf: '19283746550',
@@ -57,7 +58,7 @@ export = {
       password: 'hello123',
       status: 1,
       balance: 0,
-      accountNumber: uuidv4(),
+      account_number: uuidv4(),
     },
     {
       cpf: '11223344556',
@@ -66,7 +67,7 @@ export = {
       password: 'qwerty123',
       status: 1,
       balance: 0,
-      accountNumber: uuidv4(),
+      account_number: uuidv4(),
     },
     {
       cpf: '99887766554',
@@ -75,7 +76,7 @@ export = {
       password: 'abc123',
       status: 1,
       balance: 0,
-      accountNumber: uuidv4(),
+      account_number: uuidv4(),
     },
     {
       cpf: '45362718911',
@@ -84,7 +85,7 @@ export = {
       password: 'test456',
       status: 1,
       balance: 0,
-      accountNumber: uuidv4(),
+      account_number: uuidv4(),
     },
     {
       cpf: '76543210987',
@@ -93,7 +94,7 @@ export = {
       password: 'abcdef123',
       status: 1,
       balance: 0,
-      accountNumber: uuidv4(),
+      account_number: uuidv4(),
     },
     ]);
   },

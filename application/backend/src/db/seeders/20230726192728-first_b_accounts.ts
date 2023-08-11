@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable max-lines-per-function */
 
 import { QueryInterface } from 'sequelize';
@@ -14,7 +15,7 @@ export = {
         password: 'abcdef123',
         status: 1,
         balance: 0,
-        accountNumber: uuidv4(),
+        account_number: uuidv4(),
       },
       {
         cnpj: '98765432101122',
@@ -23,7 +24,7 @@ export = {
         password: 'qwerty123',
         status: 1,
         balance: 0,
-        accountNumber: uuidv4(),
+        account_number: uuidv4(),
       },
       {
         cnpj: '56789012345678',
@@ -32,7 +33,7 @@ export = {
         password: 'test123',
         status: 1,
         balance: 0,
-        accountNumber: uuidv4(),
+        account_number: uuidv4(),
       },
       {
         cnpj: '90817263544553',
@@ -41,7 +42,7 @@ export = {
         password: 'hello123',
         status: 1,
         balance: 0,
-        accountNumber: uuidv4(),
+        account_number: uuidv4(),
       },
       {
         cnpj: '11223344556677',
@@ -50,7 +51,7 @@ export = {
         password: 'test456',
         status: 1,
         balance: 0,
-        accountNumber: uuidv4(),
+        account_number: uuidv4(),
       },
       {
         cnpj: '19283746550192',
@@ -59,7 +60,7 @@ export = {
         password: 'abc123',
         status: 1,
         balance: 0,
-        accountNumber: uuidv4(),
+        account_number: uuidv4(),
       },
       {
         cnpj: '99887766554433',
@@ -68,7 +69,7 @@ export = {
         password: 'qwerty456',
         status: 1,
         balance: 0,
-        accountNumber: uuidv4(),
+        account_number: uuidv4(),
       },
       {
         cnpj: '45362718911098',
@@ -77,7 +78,7 @@ export = {
         password: 'hello456',
         status: 1,
         balance: 0,
-        accountNumber: uuidv4(),
+        account_number: uuidv4(),
       },
       {
         cnpj: '76543210987654',
@@ -86,7 +87,7 @@ export = {
         password: 'test789',
         status: 1,
         balance: 0,
-        accountNumber: uuidv4(),
+        account_number: uuidv4(),
       },
       {
         cnpj: '11121314151617',
@@ -95,7 +96,7 @@ export = {
         password: 'abcdef789',
         status: 1,
         balance: 0,
-        accountNumber: uuidv4(),
+        account_number: uuidv4(),
       },
     ]);
   },

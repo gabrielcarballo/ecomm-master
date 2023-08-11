@@ -35,6 +35,8 @@ const BusinessAccountValidation: joi.ObjectSchema<BusinessAccountAtt> = joi.obje
       'string.empty': 'Password cannot be empty',
       'any.required': 'Password is a required field',
     }),
+  balance: joi.number().min(0),
+  accountNumber: joi.string().uuid(),
 });
 
 export default BusinessAccountValidation;
