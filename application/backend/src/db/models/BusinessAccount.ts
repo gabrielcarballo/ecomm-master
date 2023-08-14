@@ -1,23 +1,17 @@
 import { Model, STRING, BOOLEAN, INTEGER } from 'sequelize';
+import { v4 as uuidv4 } from 'uuid';
+import { ConflictError } from '../../helpers/errorHandler/errorHandler';
 import db from '.';
 import CNPJ from '../../entities/CNPJ';
 
-interface BusinessAccountAttributes {
-  id: number,
-  cnpj: string,
-  name: string,
-  email: string,
-  password: string,
-  status: boolean,
-}
-
-class BusinessAccount extends Model<BusinessAccountAttributes> {
+export default class BusinessAccount extends Model {
   declare public id: number;
   declare public cnpj: string;
   declare public name: string;
   declare public email: string;
   declare public password: string;
   declare public status: boolean;
+  declare public balance: number;
 }
 BusinessAccount.init({
   id: {
@@ -37,7 +31,7 @@ BusinessAccount.init({
       isCnpj(cnpj: string) {
         const isValid = new CNPJ(cnpj).validateCnpj();
         if (!isValid) {
-          throw new Error('CNPJ inválido');
+          throw new ConflictError('CNPJ inválido');
         }
       },
     },
@@ -60,9 +54,26 @@ BusinessAccount.init({
     allowNull: false,
     defaultValue: true,
   },
+  balance: {
+    type: INTEGER,
+    allowNull: false,
+    defaultValue: 0,
+  },
+  accountNumber: {
+    type: STRING,
+    allowNull: false,
+    unique: true,
+    defaultValue: () => uuidv4(),
+  },
 }, {
   underscored: true,
   sequelize: db,
   modelName: 'business_accounts',
-  timestamps: false,
+  timestamps: true,
+});
+
+BusinessAccount.addHook('beforeUpdate', async (model: BusinessAccount, _options) => {
+  if (model.changed('cnpj')) {
+    throw new Error('Cannot update CNPJ attribute.');
+  }
 });

@@ -1,8 +1,8 @@
 import UpdateAccountRequest from '../../types/updateAccount.request';
 import { ConflictError } from '../../helpers/errorHandler/errorHandler';
-import PersonalAccount from '../../db/models/PersonalAccount';
-import { PersonalAccountAtt } from '../../middlewares/validations/schemas/PersonalAccountSchema';
-import { payloadType } from '../../auth/index';
+import BusinessAccount from '../../db/models/BusinessAccount';
+import { BusinessAccountAtt } from '../../middlewares/validations/schemas/BusinessAccountSchema';
+import { payloadType } from '../../auth';
 
 /**
  *
@@ -13,14 +13,14 @@ import { payloadType } from '../../auth/index';
 
 export default class PersonalAccountModel {
   public static async createAccount(
-    { cpf, email, name, password }: PersonalAccountAtt,
-  ): Promise<PersonalAccount | null> {
-    const accountExists = await this.getAccountByCpf({ cpf });
+    { cnpj, email, name, password }: BusinessAccountAtt,
+  ): Promise<BusinessAccount | null> {
+    const accountExists = await this.getAccountByCnpj({ cnpj });
     if (accountExists) {
       throw new ConflictError('ACCOUNT_ALREADY_EXISTS');
     }
-    const accountToAdd = await PersonalAccount.create({
-      cpf,
+    const accountToAdd = await BusinessAccount.create({
+      cnpj,
       email,
       name,
       password,
@@ -28,21 +28,20 @@ export default class PersonalAccountModel {
     return accountToAdd;
   }
 
-  public static async getAccountByCpf(
-    cpf: Pick<PersonalAccountAtt, 'cpf'>,
-  ): Promise<PersonalAccount | null> {
-    return PersonalAccount.findOne({ where: cpf });
+  public static async getAccountByCnpj(
+    cnpj: Pick<BusinessAccountAtt, 'cnpj'>,
+  ): Promise<BusinessAccount | null> {
+    return BusinessAccount.findOne({ where: cnpj });
   }
 
   public static async getAccountToLogin(
     email: string,
     password: string,
-  ): Promise<PersonalAccount | null> {
-    return PersonalAccount.findOne({ where: { email, password } });
+  ): Promise<BusinessAccount | null> {
+    return BusinessAccount.findOne({ where: { email, password } });
   }
 
-  public static async loginUser(payload: payloadType) {
-    const { email, password } = payload;
+  public static async loginUser(email: string, password: string) {
     const isUserValid = await this.getAccountToLogin(email, password);
     if (isUserValid) {
       return true;
@@ -58,7 +57,7 @@ export default class PersonalAccountModel {
     const { email, password } = currentInfo;
     console.log('novos', newEmail, newName, newPassword);
     console.group('atuais', email, password);
-    const updatedAccount = await PersonalAccount.update(
+    const updatedAccount = await BusinessAccount.update(
       { email: newEmail, name: newName, password: newPassword },
       { where:
         {
@@ -72,14 +71,12 @@ export default class PersonalAccountModel {
   }
 
   public static async deleteAccount({ email, password }: payloadType) {
-    const deletedAccount = await PersonalAccount.update({
+    const deletedAccount = await BusinessAccount.update({
       status: false, deletedAt: new Date(),
-    }, {
-      where: {
-        email,
-        password,
-      },
-    });
+    }, { where: { email, password } });
+    if (!deletedAccount) {
+      throw new ConflictError('Account not found');
+    }
     return deletedAccount;
   }
 }

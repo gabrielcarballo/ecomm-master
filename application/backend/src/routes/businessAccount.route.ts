@@ -1,40 +1,40 @@
 import * as express from 'express';
 import { Request, Response, NextFunction } from 'express';
 import authMiddleware from '../auth/authMiddleware';
-import PersonalAccountController from '../layers/controllers/PersonalAccountController';
-import PersonalAccountValidation from '../middlewares/validations/PersonalAccountValidations';
+import BusinessAccountController from '../layers/controllers/BusinessAccountController';
+import BusinessAccountValidations from '../middlewares/validations/BusinessAccountValidations';
 
-const PersonalAccountRouter = express.Router();
+const BusinessAccountRouter = express.Router();
 
-PersonalAccountRouter.post(
+BusinessAccountRouter.post(
   '/create',
   (req: Request, res: Response, next: NextFunction) =>
-    PersonalAccountValidation(req, res, next),
+    BusinessAccountValidations(req, res, next),
   (req: Request, res: Response, next: NextFunction) =>
-    PersonalAccountController.createAccount(req, res, next)
+    BusinessAccountController.createAccount(req, res, next)
   ,
 );
 
-PersonalAccountRouter.post(
+BusinessAccountRouter.post(
   '/login',
   (req: Request, res: Response, next: NextFunction) =>
-    PersonalAccountController.loginUser(req, res, next),
+    BusinessAccountController.loginUser(req, res, next),
 );
 
-PersonalAccountRouter.patch(
+BusinessAccountRouter.patch(
   '/update',
   (req: Request, res: Response, next: NextFunction) =>
     authMiddleware(req, res, next),
   (req: Request, res: Response, next: NextFunction) =>
-    PersonalAccountController.updateAccount(req, res, next),
+    BusinessAccountController.updateAccount(req, res, next),
 );
 
-PersonalAccountRouter.delete(
+BusinessAccountRouter.delete(
   '/delete',
   (req: Request, res: Response, next: NextFunction) =>
     authMiddleware(req, res, next),
   (req: Request, res: Response, next: NextFunction) =>
-    PersonalAccountController.deleteAccount(req, res, next),
+    BusinessAccountController.deleteAccount(req, res, next),
 );
 
-export default PersonalAccountRouter;
+export default BusinessAccountRouter;

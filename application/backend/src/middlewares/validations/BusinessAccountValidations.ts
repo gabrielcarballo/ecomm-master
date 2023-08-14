@@ -1,16 +1,15 @@
 import { NextFunction, Request, Response } from 'express';
 import errorMap from './schemas/validationsErrorMap';
-import personalAccountSchema from './schemas/PersonalAccountSchema';
+import BusinessAccountSchema from './schemas/BusinessAccountSchema';
 
-const PersonalAccountValidation = (
+const BusinessAccountValidation = (
   async (req: Request, res: Response, next: NextFunction) => {
-    const { error } = personalAccountSchema.validate(req.headers);
+    const { error } = BusinessAccountSchema.validate(req.headers);
     if (error) {
-      console.log(error);
       return res.status(errorMap(error.details[0].type))
         .json({ error: error.details[0].message });
     }
     next();
   });
 
-export default PersonalAccountValidation;
+export default BusinessAccountValidation;

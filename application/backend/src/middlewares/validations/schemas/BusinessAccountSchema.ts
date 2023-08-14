@@ -1,13 +1,13 @@
 import * as joi from 'joi';
 
-export interface PersonalAccountAtt {
+export interface BusinessAccountAtt {
   name: string,
-  cpf: string,
+  cnpj: string,
   email: string,
   password: string,
 }
 
-const PersonalAccountValidation: joi.ObjectSchema<PersonalAccountAtt> = joi.object({
+const BusinessAccountValidation: joi.ObjectSchema<BusinessAccountAtt> = joi.object({
   name: joi.string().min(3).max(150).required()
     .messages({
       'string.min': 'Name must be at least 3 characters long',
@@ -15,12 +15,12 @@ const PersonalAccountValidation: joi.ObjectSchema<PersonalAccountAtt> = joi.obje
       'string.empty': 'Name cannot be empty',
       'any.required': 'Name is a required field',
     }),
-  cpf: joi.string().min(11).max(14).required()
+  cnpj: joi.string().min(14).max(17).required()
     .messages({
-      'string.min': 'CPF must be at least 11 characters long',
-      'string.max': 'CPF must be less than or equal to 14 characters long',
-      'string.empty': 'CPF cannot be empty',
-      'any.required': 'CPF is a required field',
+      'string.min': 'CNPJ must be at least 14 characters long',
+      'string.max': 'CNPJ must be less than or equal to 17 characters long',
+      'string.empty': 'CNPJ cannot be empty',
+      'any.required': 'CNPJ is a required field',
     }),
   email: joi.string().email().required()
     .messages({
@@ -39,4 +39,4 @@ const PersonalAccountValidation: joi.ObjectSchema<PersonalAccountAtt> = joi.obje
   accountNumber: joi.string().uuid(),
 });
 
-export default PersonalAccountValidation;
+export default BusinessAccountValidation;
